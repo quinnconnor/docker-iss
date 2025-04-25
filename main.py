@@ -28,6 +28,11 @@ def get_iss_location():
         response = requests.get(url)
         r = response.json()
 
+        # added change
+        if r.get('message') != 'success':
+            logger.error("API did not return success message")
+            exit(1)
+
         # fetch values from response
         timestamp = r['timestamp']
         # convert timestamp to human readable date and time (out of epoch)
